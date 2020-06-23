@@ -1,13 +1,13 @@
-class NoteDetail {
+class NoteModel {
   int _id;
   String _title;
   String _description;
   String _date;
   int _priority;
 
-  NoteDetail(this._title, this._date, this._priority, [this._description]);
+  NoteModel(this._title, this._date, this._priority, [this._description]);
 
-  NoteDetail.withId(this._id, this._title, this._date, this._priority,
+  NoteModel.withId(this._id, this._title, this._date, this._priority,
       [this._description]);
 
   int get priority => _priority;
@@ -52,7 +52,7 @@ class NoteDetail {
   }
 
   //Extract a note object from a map object
-  NoteDetail.fromMapObject(Map<String, dynamic> map) {
+  NoteModel.fromMapObject(Map<String, dynamic> map) {
     this._id = map['id'];
     this._title = map['title'];
     this._description = map['description'];
