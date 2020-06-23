@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:notepad/models/note_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -72,7 +73,8 @@ class DatabaseHelper {
 // delete note
   Future<int> deleteNote(int id) async {
     Database db = await this.database;
-    var result = await db.rawDelete('DELETE FROM $noteTable WHERE $colId = $id');
+    var result =
+        await db.rawDelete('DELETE FROM $noteTable WHERE $colId = $id');
     return result;
   }
 
@@ -80,8 +82,24 @@ class DatabaseHelper {
   Future<int> getNoteCount() async {
     Database db = await this.database;
 
-    List<Map<String, dynamic>> x = await db.rawQuery('SELECT COUNT (*) from $noteTable');
+    List<Map<String, dynamic>> x =
+        await db.rawQuery('SELECT COUNT (*) from $noteTable');
     var result = Sqflite.firstIntValue(x);
     return result;
+  }
+
+  // get Number of Note
+  Future<List<NoteModel>> getNoteList() async {
+    var noteMapList = await getNoteMapList();
+    debugPrint(noteMapList.toString());
+    int count = noteMapList.length;
+
+    List<NoteModel> noteList = List<NoteModel>();
+    for (int i = 0; i < count; i++) {
+      noteList.add(NoteModel.fromMapObject(noteMapList[i]));
+
+    }
+
+    return noteList;
   }
 }

@@ -44,9 +44,9 @@ class NoteModel {
       map['id'] = _id;
     }
     map['title'] = _title;
-    map['description'] = _title;
-    map['date'] = _title;
-    map['priority'] = _title;
+    map['description'] = _description;
+    map['date'] = _date;
+    map['priority'] = _priority;
 
     return map;
   }
