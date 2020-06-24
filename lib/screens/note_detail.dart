@@ -39,6 +39,7 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
         },
         child: Scaffold(
           appBar: AppBar(
+            centerTitle: false,
             title: Text(appbarTitle),
             leading: IconButton(
               icon: Icon(Icons.arrow_back_ios),

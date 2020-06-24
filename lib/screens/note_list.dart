@@ -23,6 +23,7 @@ class _NoteListState extends State<NoteListScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: false,
         title: Text("NoteList"),
       ),
       body: getNoteListView(),
@@ -55,15 +56,28 @@ class _NoteListState extends State<NoteListScreen> {
         itemCount: count,
         itemBuilder: (BuildContext context, int position) {
           return Card(
-            color: Colors.grey,
+            color: Colors.white,
             elevation: 4.0,
             child: ListTile(
-              title: Text(noteList[position].title),
-              subtitle: Text(noteList[position].date),
+              title: Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                child: Text(
+                  noteList[position].title,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Text(noteList[position].date),
+              ),
               trailing: GestureDetector(
                 child: Icon(
                   Icons.delete,
-                  color: Colors.red,
+                  color: Colors.black,
                 ),
                 onTap: () {
                   _deleteNote(context, noteList[position]);
@@ -92,7 +106,6 @@ class _NoteListState extends State<NoteListScreen> {
   void updateListView() {
     final Future<Database> dbFuture = databaseHelper.initializeDatabase();
     dbFuture.then((database) {
-
       Future<List<NoteModel>> noteListFuture = databaseHelper.getNoteList();
       noteListFuture.then((noteList) {
         setState(() {
